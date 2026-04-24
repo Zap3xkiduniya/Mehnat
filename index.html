@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Story</title>
+<style>
+body,html{margin:0;padding:0;font-family:sans-serif;overflow:hidden;background:#000;color:#fff}
+.page{position:absolute;width:100%;height:100%;top:0;left:0;display:none;justify-content:center;align-items:center;text-align:center;padding:40px;box-sizing:border-box}
+.page.active{display:flex}
+video.bg{position:absolute;width:100%;height:100%;object-fit:cover;z-index:-1}
+.text{max-width:900px;font-size:20px;line-height:1.7;background:rgba(0,0,0,.55);padding:25px;border-radius:20px}
+.videoPlayer{width:80%;max-width:700px}
+</style>
+</head>
+<body onclick="nextPage()"><audio id="bgMusic" src="music.mp3"></audio>
+
+<div class="page active"><video class="bg" src="video1.mp4" autoplay muted loop></video>
+<div class="text">Hello, to main ek chhote se family ka ladka hoon. Padhai complete karke job bhi ki, lekin job chhod di kyunki us kaam me dil nahi lagta tha. Mere ghar me zyada log nahi hain, sirf 6 log hain. Main thoda mentally disturb ho jata hoon, mujhe bahut jaldi gussa aa jata hai aur kisi bhi baat ka bura bhi jaldi maan jata hoon. Isliye meri ghar walon se zyada banti nahi hai.</div></div><div class="page"><video class="bg" src="video2.mp4" autoplay muted loop></video>
+<div class="text">Mujhe lagta hai aisa hone ka karan bhi mere ghar wale hi hain, kyunki jab main 6–7 saal ka tha tab se mujhe ghar walon ka pyaar kabhi nahi mila. Main kabhi kisi tyohar me khush nahi raha. Khush kaise hota? Tyohar ke time par bhi mere ghar wale mujhse pyaar se baat nahi karte the, aur abhi bhi nahi karte.</div></div><div class="page"><video class="bg" src="video3.mp4" autoplay muted loop></video>
+<div class="text">Isliye main kaafi akela rehta tha. Mere paas ek Samsung J5 Prime phone tha. Free Fire aur PUBG se meri gaming journey start hui. BGMI ne fir se life me excitement laayi aur mujhe dost mile jo mujhe respect karte the.</div></div><div class="page"><video class="bg" src="video4.mp4" autoplay muted loop></video>
+<div class="text">Phir meri life me bahut ups and downs aaye. Dosti toot gayi, heartbreak hua, lekin phir meri life me Zara aayi. Usne mujhe mere sabse bure phase me accept kiya aur support kiya.</div></div><div class="page"><video class="bg" src="video5.mp4" autoplay muted loop></video>
+<div class="text">Hum roz ladte hain, block karte hain, phir baat karte hain. Main kabhi kisi ko sorry nahi bolta tha, lekin uske liye mera ego khatam ho gaya. Jaan, I love you ❤️ Kabhi chhod kar mat jaana. Tum ho to sab hai 💖</div></div><div class="page" style="background:black">
+<div>
+<h1>Our Videos ❤️</h1>
+<video class="videoPlayer" controls src="videoA.mp4"></video>
+<br><br>
+<video class="videoPlayer" controls src="videoB.mp4"></video>
+</div>
+</div><script>
+let current=0;
+const pages=document.querySelectorAll('.page');
+const music=document.getElementById('bgMusic');
+let started=false;
+function nextPage(){
+ if(!started){music.play();started=true}
+ pages[current].classList.remove('active');
+ current=(current+1)%pages.length;
+ pages[current].classList.add('active');
+}
+</script></body>
+</html>
