@@ -1,63 +1,153 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Love Story</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-body,html{margin:0;padding:0;font-family:Poppins, sans-serif;overflow:auto;background:#000;color:#fff}
-.page{min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:60px 20px;box-sizing:border-box;}
-.page.active{display:flex}
-.bg{position:absolute;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(.5)}
-.text{max-width:900px;font-size:20px;line-height:1.7;background:rgba(0,0,0,.55);padding:25px;border-radius:20px;max-height:80vh;overflow:auto}
-#audio{display:none}
-.heart{position:fixed;color:#ff4d6d;font-size:20px;animation:float 6s linear infinite;opacity:.7}
-@keyframes float{0%{transform:translateY(100vh) scale(.5)}100%{transform:translateY(-10vh) scale(1.4)}}
-#gameBox{width:320px;height:420px;border:2px solid #fff;border-radius:20px;position:relative;overflow:auto}
-#player{width:40px;height:40px;background:#00f;border-radius:50%;position:absolute;bottom:10px;left:140px}
-.enemy{width:40px;height:40px;background:#ff4d6d;border-radius:50%;position:absolute;top:-40px}
-</style>
-</head>
-<body onclick="nextPage()"><audio id="bgMusic" src="music.mp3"></audio>
 
-<!-- PAGE 1 --><div class="page active"><img class="bg" src="photo.jpg"><div class="text">Hello, to main ek chhote se family ka ladka hoon. Padhai complete karke job bhi ki, lekin job chhod di kyunki us kaam me dil nahi lagta tha. Mere ghar me zyada log nahi hain, sirf 6 log hain. Main thoda mentally disturb ho jata hoon, mujhe bahut jaldi gussa aa jata hoon aur kisi bhi baat ka bura bhi jaldi maan jata hoon. Isliye meri ghar walon se zyada banti nahi hai. Mujhe lagta hai aisa hone ka karan bhi mere ghar wale hi hain, kyunki jab main 6–7 saal ka tha tab se mujhe ghar walon ka pyaar kabhi nahi mila. Main kabhi kisi tyohar me khush nahi raha. Khush kaise hota? Tyohar ke time par bhi mere ghar wale mujhse pyaar se baat nahi karte the, aur abhi bhi nahi karte.</div></div><div class="page"><img class="bg" src="photo.jpg"><div class="text">Isliye main kaafi akela rehta tha. Mere paas ek Samsung J5 Prime phone tha, us zamane me latest model tha. Usme main sirf videos dekhta tha. 4G internet tha, data khatam ho jata tha to phir recharge kar leta tha. Ghar walon ne pyaar nahi diya, lekin paisa hamesha diya udane ke liye. Mere paas paise hote the, isliye recharge kar liya karta tha. Ek din main cartoon dekh raha tha, tab Free Fire game ka ad aaya. Maine download kiya aur khelna start kiya. Mujhe personally bahut achha laga aur main usme busy rehne laga. Kuch dino baad PUBG Mobile aayi aur maine wo khelna start kiya.</div></div><div class="page"><img class="bg" src="photo.jpg"><div class="text">Kuch saal aise hi beet gaye. Tab mujhe yaad aaya ki meri ek girlfriend bhi thi — Sabina. Game par wapas aate hain. Pata nahi kiski nazar lag gayi PUBG par aur wo ban ho gaya. Pura ek saal maine game nahi khela. Ek saal baad BGMI aaya aur maine phir se start kiya. 2–3 saal pehle mujhe ek friend mila jo offline friend tha. Uske shop par ek banda aata tha jisne 1v1 challenge diya. Maine uske saath rooms khele aur zyada matches jeeta. Usne mujhe “sir” bola — pehli baar kisi ne mujhe itni respect di. Uska naam Safi (BROKEN) hai. Maine use game sikhaya, wo mujhe guru maanta hai.</div></div><div class="page"><img class="bg" src="photo.jpg"><div class="text">Phir usne mujhe apne friend DEVIL GAUTAM se milwaya. Hum dost ban gaye. Main apna dard batata tha, wo apna dard batate the. Hum roz mazaak karte the. Main pehle gaali nahi deta tha, lekin in logon ke saath rehkar gaali dene laga. Sangat ka asar pad gaya. Phir ek aur friend mila — Stark OP. Wo 36 saal ka tha, mujhe respect karta tha. Phir dosti me third person aa gaya aur sab badal gaya. Mujhe bahut bada jhatka laga, kyunki main already Sabina ke cheating se toot chuka tha. Us din meri duniya hil gayi. Main bilkul toot chuka tha… andar se khali ho gaya tha.</div></div><div class="page"><img class="bg" src="photo.jpg"><div class="text">Aur phir meri life me tum aayi. Tumne mujhe accept kiya, support kiya aur samjhaya ki sachcha pyaar chehre se nahi dil se hota hai. Hum roz ladte hain, block karte hain, phir baat karte hain. Tum gussa hoti ho to meri saanse ruk jati hain, tum has deti ho to mera pura din ban jata hai. Tum meri aadat, meri zarurat aur meri duniya ban chuki ho. Jaan, I love you ❤️ Kabhi mujhe chhod kar mat jaana. Tum ho to main hoon. Tum ho to meri duniya hai. Tum ho to sab kuch hai 💖</div></div><script>
-let current=0;
-const pages=document.querySelectorAll('.page');
-const music=document.getElementById('bgMusic');
-let started=false;
-function nextPage(){
- if(!started){music.play();started=true}
- pages[current].classList.remove('active');
- current=(current+1)%pages.length;
- pages[current].classList.add('active');
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+body{overflow:hidden;background:#000;}
+
+.bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("background.jpg") center/cover no-repeat;
+  filter:brightness(0.35);
+  z-index:-2;
 }
 
-// floating hearts
-setInterval(()=>{
- let heart=document.createElement('div');
- heart.className='heart';
- heart.innerHTML='❤';
- heart.style.left=Math.random()*100+'vw';
- heart.style.fontSize=(Math.random()*20+10)+'px';
- document.body.appendChild(heart);
- setTimeout(()=>heart.remove(),6000);
-},300);
+.page{
+  position:absolute;
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:60px;
+  color:#fff;
+  font-size:22px;
+  line-height:1.8;
+  opacity:0;
+  transform:translateY(60px) scale(.95);
+  transition:1s;
+}
 
-// mini game
-const box=document.getElementById('gameBox');
-const player=document.getElementById('player');
-let px=140;
-document.addEventListener('mousemove',e=>{px=e.clientX-20;player.style.left=px+'px'})
+.page.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.box{
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.08);
+  border-radius:25px;
+  padding:50px;
+  box-shadow:0 0 40px rgba(255,255,255,0.15);
+  max-width:900px;
+  max-height:80vh;
+  overflow:auto;
+}
+
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d6d;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:.7;
+}
+@keyframes float{
+  0%{transform:translateY(0) rotate(0);}
+  100%{transform:translateY(-120vh) rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<audio id="music" src="music.mp3"></audio>
+
+<!-- PAGE 1 -->
+<div class="page active"><div class="box">
+Hello, to main ek chhote se family ka ladka hoon. Padhai complete karke job bhi ki, lekin job chhod di kyunki us kaam me dil nahi lagta tha.
+</div></div>
+
+<!-- PAGE 2 -->
+<div class="page"><div class="box">
+Mere ghar me sirf 6 log hain. Main thoda mentally disturb ho jata hoon, mujhe jaldi gussa aa jata hai aur kisi bhi baat ka bura maan jata hoon.
+</div></div>
+
+<!-- PAGE 3 -->
+<div class="page"><div class="box">
+Jab main 6–7 saal ka tha tab se mujhe ghar walon ka pyaar kabhi nahi mila. Tyohar ke time bhi mujhe kabhi pyaar se baat nahi mili.
+</div></div>
+
+<!-- PAGE 4 -->
+<div class="page"><div class="box">
+Main kaafi akela rehta tha. Mere paas Samsung J5 Prime tha aur main bas videos dekhta rehta tha.
+</div></div>
+
+<!-- PAGE 5 -->
+<div class="page"><div class="box">
+Ek din Free Fire ka ad aaya. Fir PUBG Mobile khelna start kiya. Kisi ko nahi pata tha main games khelta hoon.
+</div></div>
+
+<!-- PAGE 6 -->
+<div class="page"><div class="box">
+PUBG ban ho gaya… fir BGMI aaya. Safi mila jisne mujhe "Sir" bola. Pehli baar kisi ne respect di.
+</div></div>
+
+<!-- PAGE 7 -->
+<div class="page"><div class="box">
+DEVIL GAUTAM aur Stark OP mile. Wo mujhe bhai jaisa treat karte the. Maine unki help ki, paise tak kharch kiye.
+</div></div>
+
+<!-- PAGE 8 -->
+<div class="page"><div class="box">
+Phir Sabina ki shaadi ka pata chala… wo mujhe cheat kar rahi thi. Us din meri duniya hil gayi.
+</div></div>
+
+<!-- PAGE 9 -->
+<div class="page"><div class="box">
+Phir Zara meri life me aayi. Usne mujhe accept kiya jab main apne sabse bure phase me tha.
+</div></div>
+
+<!-- PAGE 10 -->
+<div class="page"><div class="box">
+Hum ladte hain, block karte hain, fir baat karte hain.  
+Ego khatam ho gaya.  
+Jaan, I love you ❤️  
+Kabhi chhod kar mat jaana.  
+Tum ho to sab hai 💖
+</div></div>
+
+<script>
+let pages=document.querySelectorAll(".page");
+let current=0;
+let music=document.getElementById("music");
+let started=false;
+
+document.body.addEventListener("click",()=>{
+  if(!started){music.play();started=true;}
+  pages[current].classList.remove("active");
+  current++;
+  if(current>=pages.length) current=pages.length-1;
+  pages[current].classList.add("active");
+});
+
 setInterval(()=>{
- let enemy=document.createElement('div');
- enemy.className='enemy';
- enemy.style.left=Math.random()*280+'px';
- box.appendChild(enemy);
- let fall=setInterval(()=>{
-  enemy.style.top=enemy.offsetTop+5+'px';
-  if(enemy.offsetTop>380){enemy.remove();clearInterval(fall)}
-  if(enemy.offsetTop>340 && Math.abs(enemy.offsetLeft-px)<40){alert('Breakup 💔');location.reload()}
- },30);
-},1200);
-</script></body>
+ let heart=document.createElement("div");
+ heart.className="heart";
+ heart.innerHTML="❤";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.fontSize=(Math.random()*20+15)+"px";
+ document.body.appendChild(heart);
+ setTimeout(()=>heart.remove(),8000);
+},400);
+</script>
+
+</body>
 </html>
