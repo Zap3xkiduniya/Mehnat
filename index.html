@@ -1,162 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Story</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
-body{overflow:hidden;background:#000;}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('photo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
 
-.bg{
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:-2;
-  overflow:hidden;
-}
-.bg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(0.35);
-}
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+        }
 
-.page{
-  position:absolute;
-  width:100%;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:60px;
-  color:#fff;
-  font-size:22px;
-  line-height:1.8;
-  opacity:0;
-  transform:translateY(60px) scale(.95);
-  transition:1s;
-}
+        .page.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-.page.active{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
+        .page.prev {
+            transform: translateX(-100%);
+        }
 
-.box{
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,0.08);
-  border-radius:25px;
-  padding:50px;
-  box-shadow:0 0 40px rgba(255,255,255,0.15);
-  max-width:900px;
-  max-height:80vh;
-  overflow:auto;
-}
+        .story-text {
+            font-size: clamp(18px, 4vw, 24px);
+            line-height: 1.6;
+            max-width: 90%;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 30px;
+        }
 
-.heart{
-  position:fixed;
-  bottom:-20px;
-  color:#ff4d6d;
-  font-size:20px;
-  animation:float 8s linear infinite;
-  opacity:.7;
-}
-@keyframes float{
-  0%{transform:translateY(0) rotate(0);}
-  100%{transform:translateY(-120vh) rotate(360deg);}
-}
-</style>
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 30px rgba(255,182,193,0.3); }
+            to { text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 40px rgba(255,182,193,0.6); }
+        }
+
+        .tap-hint {
+            position: absolute;
+            bottom: 100px;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+            opacity: 0;
+        }
+
+        .tap-hint.show {
+            opacity: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .music-btn:hover {
+            background: rgba(255,182,193,0.4);
+            transform: scale(1.1);
+        }
+
+        .music-btn.muted::after {
+            content: '🔇';
+        }
+
+        .progress-dots {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #ff69b4;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px #ff69b4;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: float 6s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .the-end {
+            font-size: clamp(32px, 8vw, 48px) !important;
+            color: #ff69b4 !important;
+            text-shadow: none !important;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            max-width: 90%;
+        }
+    </style>
 </head>
 <body>
+    <!-- Music Audio -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        <!-- Fallback: Add your romantic music file here -->
+    </audio>
 
-<!-- Background Image -->
-<div class="bg">
-   <img src="./background.jpg">
-</div>
+    <!-- Music Control -->
+    <div class="music-btn" id="musicBtn">🎵</div>
 
-<audio id="music" src="music.mp3"></audio>
+    <!-- Story Pages -->
+    <div class="page active" data-page="1">
+        <div class="glass-card">
+            <div class="story-text">
+                Hello, to main ek chhote se family ka ladka hoon.<br>
+                Padhai complete karke job bhi ki, lekin job chhod di kyunki us kaam me dil nahi lagta tha.<br>
+                Mere ghar me zyada log nahi hain, aur bachpan se hi mujhe gussa bahut aata tha.<br>
+                Ghar walon ka pyaar kabhi mehsoos nahi hua.
+            </div>
+        </div>
+        <div class="tap-hint show" id="tapHint">👆 Tap Anywhere to Continue</div>
+    </div>
 
-<!-- PAGE 1 -->
-<div class="page active"><div class="box">
-Hello, to main ek chhote se family ka ladka hoon. Padhai complete karke job bhi ki, lekin job chhod di kyunki us kaam me dil nahi lagta tha.
-</div></div>
+    <div class="page" data-page="2">
+        <div class="glass-card">
+            <div class="story-text">
+                Bachpan se hi mujhe akela rehne ki aadat ho gayi thi.<br>
+                Tyohar bhi aate the lekin andar se khushi nahi hoti thi.<br>
+                Sab log enjoy karte the, aur main chup rehta tha.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 2 -->
-<div class="page"><div class="box">
-Mere ghar me sirf 6 log hain. Main thoda mentally disturb ho jata hoon, mujhe jaldi gussa aa jata hai aur kisi bhi baat ka bura maan jata hoon.
-</div></div>
+    <div class="page" data-page="3">
+        <div class="glass-card">
+            <div class="story-text">
+                Mere paas Samsung J5 Prime phone tha.<br>
+                Internet meri duniya ban gaya.<br>
+                Recharge, videos, timepass — sab tha… bas pyaar nahi tha.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 3 -->
-<div class="page"><div class="box">
-Jab main 6–7 saal ka tha tab se mujhe ghar walon ka pyaar kabhi nahi mila. Tyohar ke time bhi mujhe kabhi pyaar se baat nahi mili.
-</div></div>
+    <div class="page" data-page="4">
+        <div class="glass-card">
+            <div class="story-text">
+                Fir meri life me gaming aayi.<br>
+                Free Fire khela, fir PUBG Mobile.<br>
+                Game hi meri life ban gaya.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 4 -->
-<div class="page"><div class="box">
-Main kaafi akela rehta tha. Mere paas Samsung J5 Prime tha aur main bas videos dekhta rehta tha.
-</div></div>
+    <div class="page" data-page="5">
+        <div class="glass-card">
+            <div class="story-text">
+                PUBG ban hua, fir BGMI aaya.<br>
+                Ek offline dost ne mujhe 1v1 challenge diya.<br>
+                Wahi meri gaming journey ka turning point tha.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 5 -->
-<div class="page"><div class="box">
-Ek din Free Fire ka ad aaya. Fir PUBG Mobile khelna start kiya. Kisi ko nahi pata tha main games khelta hoon.
-</div></div>
+    <div class="page" data-page="6">
+        <div class="glass-card">
+            <div class="story-text">
+                Wahan meri mulaqat Safi (BROKEN) se hui.<br>
+                Fir Gautam mila.<br>
+                Gaali, hasi, fights — real brotherhood start ho gaya.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 6 -->
-<div class="page"><div class="box">
-PUBG ban ho gaya… fir BGMI aaya. Safi mila jisne mujhe "Sir" bola. Pehli baar kisi ne respect di.
-</div></div>
+    <div class="page" data-page="7">
+        <div class="glass-card">
+            <div class="story-text">
+                Fir ek third person ne sab bigaad diya.<br>
+                Stark ke saath fight ho gayi.<br>
+                Dil toot gaya.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 7 -->
-<div class="page"><div class="box">
-DEVIL GAUTAM aur Stark OP mile. Wo mujhe bhai jaisa treat karte the. Maine unki help ki, paise tak kharch kiye.
-</div></div>
+    <div class="page" data-page="8">
+        <div class="glass-card">
+            <div class="story-text">
+                Ek din Zara meri life me aayi.<br>
+                Battle day tha.<br>
+                Usne request spam ki.<br>
+                Pehli baat rude thi… phir bhi woh ruki.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 8 -->
-<div class="page"><div class="box">
-Phir Sabina ki shaadi ka pata chala… wo mujhe cheat kar rahi thi. Us din meri duniya hil gayi.
-</div></div>
+    <div class="page" data-page="9">
+        <div class="glass-card">
+            <div class="story-text">
+                Fir Sabina ki sachchai pata chali.<br>
+                Cheating. Love marriage. Shock.<br>
+                Main completely toot gaya.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 9 -->
-<div class="page"><div class="box">
-Phir Zara meri life me aayi. Usne mujhe accept kiya jab main apne sabse bure phase me tha.
-</div></div>
+    <div class="page" data-page="10">
+        <div class="glass-card">
+            <div class="story-text">
+                Zara ne bald phase me accept kiya.<br>
+                Snap ka fear khatam hua.<br>
+                Mujhe real love samajh aaya.
+            </div>
+        </div>
+    </div>
 
-<!-- PAGE 10 -->
-<div class="page"><div class="box">
-Hum ladte hain, block karte hain, fir baat karte hain.  
-Ego khatam ho gaya.  
-Jaan, I love you ❤️  
-Kabhi chhod kar mat jaana.  
-Tum ho to sab hai 💖
-</div></div>
+    <div class="page" data-page="11">
+        <div class="glass-card">
+            <div class="story-text">
+                Daily fights. Block. Unblock.<br>
+                Snap fights. Friends interference.<br>
+                Mera ego toot gaya.
+            </div>
+        </div>
+    </div>
 
-<script>
-let pages=document.querySelectorAll(".page");
-let current=0;
-let music=document.getElementById("music");
-let started=false;
+    <div class="page" data-page="12">
+        <div class="glass-card">
+            <div class="story-text the-end">
+                Aaj main sirf sorry bolta hoon.<br>
+                Main change ho gaya hoon.<br>
+                Aur finally… I love you ❤️<br><br>
+                THE END ❤️
+            </div>
+        </div>
+    </div>
 
-document.body.addEventListener("click",()=>{
-  if(!started){music.play();started=true;}
-  pages[current].classList.remove("active");
-  current++;
-  if(current>=pages.length) current=pages.length-1;
-  pages[current].classList.add("active");
-});
+    <!-- Progress Dots -->
+    <div class="progress-dots" id="progressDots"></div>
 
-setInterval(()=>{
- let heart=document.createElement("div");
- heart.className="heart";
- heart.innerHTML="❤";
- heart.style.left=Math.random()*100+"vw";
- heart.style.fontSize=(Math.random()*20+15)+"px";
- document.body.appendChild(heart);
- setTimeout(()=>heart.remove(),8000);
-},400);
-</script>
+    <!-- Floating Hearts -->
+    <div class="hearts" id="hearts"></div>
 
+    <script>
+        class LoveStorySlideshow {
+            constructor() {
+                this.currentPage = 1;
+                this.totalPages = 12;
+                this.audio = document.getElementById('bgMusic');
+                this.musicBtn = document.getElementById('musicBtn');
+                this.heartsContainer = document.getElementById('hearts');
+                this.pages = document.querySelectorAll('.page');
+                this.tapHint = document.getElementById('tapHint');
+                
+                this.init();
+            }
+
+            init() {
+                this.createProgressDots();
+                this.setupEventListeners();
+                this.startMusic();
+                this.createHearts();
+                this.startHeartAnimation();
+            }
+
+            createProgressDots() {
+                const dotsContainer = document.getElementById('progressDots');
+                for (let i = 1; i <= this.totalPages; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    dot.dataset.page = i;
+                    if (i === 1) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToPage(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            setupEventListeners() {
+                // Tap/Click anywhere to next
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.music-btn') && !e.target.closest('.dot')) {
+                        this.nextPage();
+                    }
+                });
+
+                // Swipe support for mobile
+                let startX = 0;
+                document.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                document.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    if (startX - endX > 50) this.nextPage();
+                });
+
+                // Music toggle
+                this.musicBtn.addEventListener('click', () => this.toggleMusic());
+            }
+
+            nextPage() {
+                if (this.currentPage < this.totalPages) {
+                    this.goToPage(this.currentPage + 1);
+                }
+            }
+
+            goToPage(pageNum) {
+                const prevPage = this.pages[this.currentPage - 1];
+                const nextPage = this.pages[pageNum - 1];
+                
+                prevPage.classList.remove('active');
+                prevPage.classList.add('prev');
+                
+                nextPage.classList.add('active');
+                
+                this.updateProgress(pageNum);
+                this.currentPage = pageNum;
+                
+                // Hide tap hint after first page
+                if (pageNum > 1) {
+                    this.tapHint.classList.remove('show');
+                }
+            }
+
+            updateProgress(pageNum) {
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index + 1 === pageNum);
+                });
+            }
+
+            startMusic() {
+                this.audio.volume = 0.3;
+                this.audio.play().catch(() => {}); // Autoplay may be blocked
+            }
+
+            toggleMusic() {
+                if (this.audio.paused) {
+                    this.audio.play();
+                    this.musicBtn.textContent = '🎵';
+                } else {
+                    this.audio.pause();
+                    this.musicBtn.classList.add('muted');
+                }
+            }
+
+            createHearts() {
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    this.heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 7000);
+                }, 300);
+            }
+        }
+
+        // Initialize when DOM loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new LoveStorySlideshow();
+        });
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
 </body>
 </html>
