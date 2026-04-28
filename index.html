@@ -8,72 +8,34 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-font-family:'Poppins',sans-serif;
-overflow:hidden;
-color:#fff;
-min-height:100vh;
-}
+body{font-family:'Poppins',sans-serif;overflow:hidden;color:#fff;min-height:100vh;}
 
-/* BACKGROUND PHOTO */
 .background{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.55)),
-url("photo.jpg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-z-index:-1;
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.55)),url("photo.jpg");
+background-size:cover;background-position:center;background-repeat:no-repeat;z-index:-1;
 }
 
 .page{position:absolute;width:100%;height:100%;display:none;justify-content:center;align-items:center;padding:20px;}
 .page.active{display:flex;animation:slideIn .6s cubic-bezier(.25,.46,.45,.94);}
 @keyframes slideIn{from{opacity:0;transform:translateX(50px);}to{opacity:1;transform:translateX(0);}}
 
-.card{
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(15px);
-padding:30px;border-radius:25px;
-max-width:90%;max-height:85vh;
-overflow-y:auto;
-box-shadow:0 20px 40px rgba(0,0,0,0.3);
-border:1px solid rgba(255,255,255,0.1);
-}
+.card{background:rgba(0,0,0,0.7);backdrop-filter:blur(15px);padding:30px;border-radius:25px;
+max-width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,0.3);
+border:1px solid rgba(255,255,255,0.1);}
 
 h1{font-size:2.2em;margin-bottom:10px;text-align:center;color:#ff6b9d;}
 h2{font-size:1.5em;margin:20px 0 15px;color:#ffd93d;}
 p{line-height:1.7;font-size:1.1em;}
 
-.music-btn{
-position:fixed;top:20px;right:20px;
-background:rgba(0,0,0,0.7);border:none;
-padding:15px;border-radius:50px;
-color:#fff;font-size:1.2em;
-backdrop-filter:blur(10px);
-cursor:pointer;transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
+.music-btn{position:fixed;top:20px;right:20px;background:rgba(0,0,0,0.7);border:none;
+padding:15px;border-radius:50px;color:#fff;font-size:1.2em;cursor:pointer;}
 
-.page-counter{
-position:fixed;bottom:20px;left:20px;
-background:rgba(0,0,0,0.5);
-padding:10px 20px;border-radius:25px;
-}
+.page-counter{position:fixed;bottom:20px;left:20px;background:rgba(0,0,0,0.5);
+padding:10px 20px;border-radius:25px;}
 
-#hearts span{
-position:absolute;bottom:-30px;font-size:20px;
-animation:float 8s linear infinite;
-pointer-events:none;
-}
-@keyframes float{
-0%{transform:translateY(100vh) rotate(0deg);opacity:1;}
-100%{transform:translateY(-100px) rotate(360deg);opacity:0;}
-}
+#hearts span{position:absolute;bottom:-30px;font-size:20px;animation:float 8s linear infinite;}
+@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-100px);opacity:0;}}
 </style>
 </head>
 
@@ -82,108 +44,59 @@ pointer-events:none;
 <div class="background"></div>
 
 <button class="music-btn" id="musicBtn">🎵 Music OFF</button>
-
 <audio id="music" loop preload="auto">
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="page-counter">
-<span id="pageNum">1</span> / 15
-</div>
+<div class="page-counter"><span id="pageNum">1</span> / 15</div>
 
 <div id="pages">
 
-<!-- ALL STORY PAGES (UNCHANGED) -->
-<!-- PAGE 1 -->
-<div class="page active"><div class="card">
-<h1>🌌 Meri Kahani ❤️</h1>
-<h2>📖 Page 1: Shuruaat</h2>
-<p>Hello to mai ek chhote se family ka ladka hu jo padhai complete karke job wagaira lekar job ko chhor diya kyunki usko o kaam baithe baithe karna tha isliye mere Ghar me jyada log nahi 6 log hi hai jisme se mai thora mentally disturb hu mujhe gussa bahot jaldi aa jata hai aur kisi bhi baat ka bura bhi jaldi maan jata hu 😔</p>
-</div></div>
+<!-- STORY SAME AS ORIGINAL -->
+<div class="page active"><div class="card"><h1>🌌 Meri Kahani ❤️</h1><h2>📖 Page 1: Shuruaat</h2>
+<p>Hello to mai ek chhote se family ka ladka hu jo padhai complete karke job wagaira lekar job ko chhor diya kyunki usko o kaam baithe baithe karna tha isliye mere Ghar me jyada log nahi 6 log hi hai jisme se mai thora mentally disturb hu mujhe gussa bahot jaldi aa jata hai aur kisi bhi baat ka bura bhi jaldi maan jata hu 😔</p></div></div>
 
-<!-- PAGE 2 -->
-<div class="page"><div class="card">
-<h2>📖 Page 2: Bachpan ka Dard 💔</h2>
-<p>Isliye mujhe mere ghar walo se nahi banti mujhe aisa hone ka karan bhi mere ghar wale hi hai kyu ki jab mai 6-7 saal ka tha tabse mujhe mere ghar walo ka pyar kabhi nahi mila aur nahi kabhi mai kisi tyohar pe khush raha hu 😞</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 2: Bachpan ka Dard 💔</h2>
+<p>Isliye mujhe mere ghar walo se nahi banti mujhe aisa hone ka karan bhi mere ghar wale hi hai kyu ki jab mai 6-7 saal ka tha tabse mujhe mere ghar walo ka pyar kabhi nahi mila aur nahi kabhi mai kisi tyohar pe khush raha hu 😞</p></div></div>
 
-<!-- PAGE 3 -->
-<div class="page"><div class="card">
-<h2>📖 Page 3: Akelapan 🥀</h2>
-<p>Khush kaise hota tyohar ke time pe bhi mere ghar wale mere se pyar se baat nahi karte hai aur abhi bhi nahi karte hai baat pyar se to isliye mai kaafi akela akela rehta tha 🥺</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 3: Akelapan 🥀</h2>
+<p>Khush kaise hota tyohar ke time pe bhi mere ghar wale mere se pyar se baat nahi karte hai aur abhi bhi nahi karte hai baat pyar se to isliye mai kaafi akela akela rehta tha 🥺</p></div></div>
 
-<!-- PAGE 4 -->
-<div class="page"><div class="card">
-<h2>📖 Page 4: Pehla Phone 📱</h2>
-<p>Fir mere pass phone thi samsung j5 prime us jamane me letest model thi o phone usme mai sirf videos wagaira dekhta tha 4g internet tha data khatam hojata tha to firse recharge bhi karta tha 🔄</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 4: Pehla Phone 📱</h2>
+<p>Fir mere pass phone thi samsung j5 prime us jamane me letest model thi o phone usme mai sirf videos wagaira dekhta tha 4g internet tha data khatam hojata tha to firse recharge bhi karta tha 🔄</p></div></div>
 
-<!-- PAGE 5 -->
-<div class="page"><div class="card">
-<h2>📖 Page 5: Gaming ki Entry 🎮</h2>
-<p>Fir mai cartoon wagaira dekh raha tha to add aai free fire game ki to maine download ki aur maine khela bhi use mujhe personali bahot achha laga o game mai us game me busy rahne laga 😍</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 5: Gaming ki Entry 🎮</h2>
+<p>Fir mai cartoon wagaira dekh raha tha to add aai free fire game ki to maine download ki aur maine khela bhi use mujhe personali bahot achha laga o game mai us game me busy rahne laga 😍</p></div></div>
 
-<!-- PAGE 6 -->
-<div class="page"><div class="card">
-<h2>📖 Page 6: PUBG Wala Phase 🔥</h2>
-<p>Fir kuchh dino baad entry Hui nai game ki jiska name tha PUBG mobile fir mai o khelna start kia usme mere koi friend nahi the aur nahi mere friends jante the ki mai online game wagaira khelta hu 🎯</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 6: PUBG Wala Phase 🔥</h2>
+<p>Fir kuchh dino baad entry Hui nai game ki jiska name tha PUBG mobile fir mai o khelna start kia usme mere koi friend nahi the aur nahi mere friends jante the ki mai online game wagaira khelta hu 🎯</p></div></div>
 
-<!-- PAGE 7 -->
-<div class="page"><div class="card">
-<h2>📖 Page 7: Bhuli Hui Kahani 💭</h2>
-<p>Fir kuchh saal aise hi bit gai aur ha mai to ye bhul hi gya tha ki mere pass ek gf bhi thi us samay sabina name ki iska kahani baad me batata hu 😶</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 7: Bhuli Hui Kahani 💭</h2>
+<p>Fir kuchh saal aise hi bit gai aur ha mai to ye bhul hi gya tha ki mere pass ek gf bhi thi us samay sabina name ki iska kahani baad me batata hu 😶</p></div></div>
 
-<!-- PAGE 8 -->
-<div class="page"><div class="card">
-<h2>📖 Page 8: Nayi Dosti 🤝</h2>
-<p>PUBG ban ho gai fir ek saal baad BGMI aai aur maine fir se khelna start kia. Fir meri mulaqat hui ek dost se jiska naam tha Safi urf BROKEN jisne mujhe sir bola aur respect diya 🙏</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 8: Nayi Dosti 🤝</h2>
+<p>PUBG ban ho gai fir ek saal baad BGMI aai aur maine fir se khelna start kia. Fir meri mulaqat hui ek dost se jiska naam tha Safi urf BROKEN jisne mujhe sir bola aur respect diya 🙏</p></div></div>
 
-<!-- PAGE 9 -->
-<div class="page"><div class="card">
-<h2>📖 Page 9: Dosti Gehri 💙</h2>
-<p>Usne mujhe apne friend DEVIL GAUTAM se milwaya aur fir ham log ek dusre ke bahut close ho gaye aur apna dard share karte the 🫂</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 9: Dosti Gehri 💙</h2>
+<p>Usne mujhe apne friend DEVIL GAUTAM se milwaya aur fir ham log ek dusre ke bahut close ho gaye aur apna dard share karte the 🫂</p></div></div>
 
-<!-- PAGE 10 -->
-<div class="page"><div class="card">
-<h2>📖 Page 10: Stark ki Entry ⚡</h2>
-<p>Fir ek aur friend bana stark Op jo age me bada tha par bahut respect karta tha. Maine uski help bhi ki game me aur hamari dosti aur gehri ho gayi 💪</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 10: Stark ki Entry ⚡</h2>
+<p>Fir ek aur friend bana stark Op jo age me bada tha par bahut respect karta tha. Maine uski help bhi ki game me aur hamari dosti aur gehri ho gayi 💪</p></div></div>
 
-<!-- PAGE 11 -->
-<div class="page"><div class="card">
-<h2>📖 Page 11: Dosti me Darar ⚠️</h2>
-<p>Fir ek third person aaya jiske wajah se dosti me problem aayi aur stark mere khilaf ho gaya jisse mujhe bahut bada jhatka laga 💔</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 11: Dosti me Darar ⚠️</h2>
+<p>Fir ek third person aaya jiske wajah se dosti me problem aayi aur stark mere khilaf ho gaya jisse mujhe bahut bada jhatka laga 💔</p></div></div>
 
-<!-- PAGE 12 -->
-<div class="page"><div class="card">
-<h2>📖 Page 12: Zara ki Entry 💖</h2>
-<p>Isi beech meri life me entry hui zara ki. Pehle maine usse gusse me baat ki par usko meri baate pasand aa gayi aur dheere dheere ham close ho gaye 😳</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 12: Zara ki Entry 💖</h2>
+<p>Isi beech meri life me entry hui zara ki. Pehle maine usse gusse me baat ki par usko meri baate pasand aa gayi aur dheere dheere ham close ho gaye 😳</p></div></div>
 
-<!-- PAGE 13 -->
-<div class="page"><div class="card">
-<h2>📖 Page 13: Tuta Hua Dil 💔</h2>
-<p>Maine use apni purani gf sabina ke bare me bataya jisne mujhe cheat kiya tha aur us baat ne mujhe andar se tod diya tha 😢</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 13: Tuta Hua Dil 💔</h2>
+<p>Maine use apni purani gf sabina ke bare me bataya jisne mujhe cheat kiya tha aur us baat ne mujhe andar se tod diya tha 😢</p></div></div>
 
-<!-- PAGE 14 -->
-<div class="page"><div class="card">
-<h2>📖 Page 14: Zara ka Saath 🌹</h2>
-<p>Zara ne mujhe sambhala, support kiya aur mere bure waqt me saath diya. Hamari fights bhi hoti thi par pyar bhi utna hi tha ❤️</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 14: Zara ka Saath 🌹</h2>
+<p>Zara ne mujhe sambhala, support kiya aur mere bure waqt me saath diya. Hamari fights bhi hoti thi par pyar bhi utna hi tha ❤️</p></div></div>
 
-<!-- PAGE 15 -->
-<div class="page"><div class="card">
-<h2>📖 Page 15: Dil ki Baat 💌</h2>
-<p>Aaj bhi hamare beech ladai hoti hai par mai usse bahut pyar karta hu aur bas ye hi kehna hai – kabhi chhor kar mat jana mujhe. The End ❤️</p>
-</div></div>
+<div class="page"><div class="card"><h2>📖 Page 15: Dil ki Baat 💌</h2>
+<p>Aaj bhi hamare beech ladai hoti hai par mai usse bahut pyar karta hu aur bas ye hi kehna hai – kabhi chhor kar mat jana mujhe. The End ❤️</p></div></div>
 
 </div>
 
@@ -196,242 +109,16 @@ let music=document.getElementById("music");
 let musicBtn=document.getElementById("musicBtn");
 let pageNum=document.getElementById("pageNum");
 
+function showPage(i){pages.forEach(p=>p.classList.remove("active"));pages[i].classList.add("active");pageNum.textContent=i+1;}
+function nextPage(){currentPage=(currentPage+1)%pages.length;showPage(currentPage);}
 document.body.addEventListener("click",nextPage);
-function nextPage(){
-pages[currentPage].classList.remove("active");
-currentPage=(currentPage+1)%pages.length;
-pages[currentPage].classList.add("active");
-pageNum.textContent=currentPage+1;
-}
 
-// floating hearts
-function createHeart(){
-let heart=document.createElement("span");
-heart.innerHTML=["❤️","💖","💕","💗","💓"][Math.floor(Math.random()*5)];
-heart.style.left=Math.random()*100+"%";
-heart.style.animationDuration=(5+Math.random()*3)+"s";
-document.getElementById("hearts").appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart,250);
+music.muted=true;
+music.play().then(()=>{setTimeout(()=>{music.muted=false;musicBtn.textContent="🎵 Music ON";},500);}).catch(()=>{});
+document.addEventListener("click",()=>{music.muted=false;music.play().catch(()=>{});});
 
-// MUSIC BUTTON
-musicBtn.onclick=(e)=>{
-e.stopPropagation();
-if(music.paused){
-music.play();
-musicBtn.textContent="🎵 Music ON";
-}else{
-music.pause();
-musicBtn.textContent="🎵 Music OFF";
-}
-};
-
-// AUTO PLAY ON FIRST TOUCH
-function startMusic(){
-music.play().catch(()=>{});
-musicBtn.textContent="🎵 Music ON";
-document.removeEventListener("click",startMusic);
-document.removeEventListener("touchstart",startMusic);
-}
-document.addEventListener("click",startMusic);
-document.addEventListener("touchstart",startMusic);
+musicBtn.onclick=(e)=>{e.stopPropagation();if(music.paused){music.play();musicBtn.textContent="🎵 Music ON";}else{music.pause();musicBtn.textContent="🎵 Music OFF";}};
 </script>
 
-</body>
-</html><div class="page active" data-page="1">
-    <div class="card">
-        <h1>🌌 Meri Kahani ❤️</h1>
-        <h2>📖 Page 1: Shuruaat</h2>
-        <p>Hello to mai ek chhote se family ka ladka hu jo padhai complete karke job wagaira lekar job ko chhor diya kyunki usko o kaam baithe baithe karna tha isliye mere Ghar me jyada log nahi 6 log hi hai jisme se mai thora mentally disturb hu mujhe gussa bahot jaldi aa jata hai aur kisi bhi baat ka bura bhi jaldi maan jata hu 😔</p>
-    </div>
-</div>
-
-<!-- PAGE 2 -->
-<div class="page" data-page="2">
-    <div class="card">
-        <h2>📖 Page 2: Bachpan ka Dard 💔</h2>
-        <p>Isliye mujhe mere ghar walo se nahi banti mujhe aisa hone ka karan bhi mere ghar wale hi hai kyu ki jab mai 6-7 saal ka tha tabse mujhe mere ghar walo ka pyar kabhi nahi mila aur nahi kabhi mai kisi tyohar pe khush raha hu 😞</p>
-    </div>
-</div>
-
-<!-- PAGE 3 -->
-<div class="page" data-page="3">
-    <div class="card">
-        <h2>📖 Page 3: Akelapan 🥀</h2>
-        <p>Khush kaise hota tyohar ke time pe bhi mere ghar wale mere se pyar se baat nahi karte hai aur abhi bhi nahi karte hai baat pyar se to isliye mai kaafi akela akela rehta tha 🥺</p>
-    </div>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page" data-page="4">
-    <div class="card">
-        <h2>📖 Page 4: Pehla Phone 📱</h2>
-        <p>Fir mere pass phone thi samsung j5 prime us jamane me letest model thi o phone usme mai sirf videos wagaira dekhta tha 4g internet tha data khatam hojata tha to firse recharge bhi karta tha 🔄</p>
-    </div>
-</div>
-
-<!-- PAGE 5 -->
-<div class="page" data-page="5">
-    <div class="card">
-        <h2>📖 Page 5: Gaming ki Entry 🎮</h2>
-        <p>Fir mai cartoon wagaira dekh raha tha to add aai free fire game ki to maine download ki aur maine khela bhi use mujhe personali bahot achha laga o game mai us game me busy rahne laga 😍</p>
-    </div>
-</div>
-
-<!-- PAGE 6 -->
-<div class="page" data-page="6">
-    <div class="card">
-        <h2>📖 Page 6: PUBG Wala Phase 🔥</h2>
-        <p>Fir kuchh dino baad entry Hui nai game ki jiska name tha PUBG mobile fir mai o khelna start kia usme mere koi friend nahi the aur nahi mere friends jante the ki mai online game wagaira khelta hu 🎯</p>
-    </div>
-</div>
-
-<!-- PAGE 7 -->
-<div class="page" data-page="7">
-    <div class="card">
-        <h2>📖 Page 7: Bhuli Hui Kahani 💭</h2>
-        <p>Fir kuchh saal aise hi bit gai aur ha mai to ye bhul hi gya tha ki mere pass ek gf bhi thi us samay sabina name ki iska kahani baad me batata hu 😶</p>
-    </div>
-</div>
-
-<!-- PAGE 8 -->
-<div class="page" data-page="8">
-    <div class="card">
-        <h2>📖 Page 8: Nayi Dosti 🤝</h2>
-        <p>PUBG ban ho gai fir ek saal baad BGMI aai aur maine fir se khelna start kia. Fir meri mulaqat hui ek dost se jiska naam tha Safi urf BROKEN jisne mujhe sir bola aur respect diya 🙏</p>
-    </div>
-</div>
-
-<!-- PAGE 9 -->
-<div class="page" data-page="9">
-    <div class="card">
-        <h2>📖 Page 9: Dosti Gehri 💙</h2>
-        <p>Usne mujhe apne friend DEVIL GAUTAM se milwaya aur fir ham log ek dusre ke bahut close ho gaye aur apna dard share karte the 🫂</p>
-    </div>
-</div>
-
-<!-- PAGE 10 -->
-<div class="page" data-page="10">
-    <div class="card">
-        <h2>📖 Page 10: Stark ki Entry ⚡</h2>
-        <p>Fir ek aur friend bana stark Op jo age me bada tha par bahut respect karta tha. Maine uski help bhi ki game me aur hamari dosti aur gehri ho gayi 💪</p>
-    </div>
-</div>
-
-<!-- PAGE 11 -->
-<div class="page" data-page="11">
-    <div class="card">
-        <h2>📖 Page 11: Dosti me Darar ⚠️</h2>
-        <p>Fir ek third person aaya jiske wajah se dosti me problem aayi aur stark mere khilaf ho gaya jisse mujhe bahut bada jhatka laga 💔</p>
-    </div>
-</div>
-
-<!-- PAGE 12 -->
-<div class="page" data-page="12">
-    <div class="card">
-        <h2>📖 Page 12: Zara ki Entry 💖</h2>
-        <p>Isi beech meri life me entry hui zara ki. Pehle maine usse gusse me baat ki par usko meri baate pasand aa gayi aur dheere dheere ham close ho gaye 😳</p>
-    </div>
-</div>
-
-<!-- PAGE 13 -->
-<div class="page" data-page="13">
-    <div class="card">
-        <h2>📖 Page 13: Tuta Hua Dil 💔</h2>
-        <p>Maine use apni purani gf sabina ke bare me bataya jisne mujhe cheat kiya tha aur us baat ne mujhe andar se tod diya tha 😢</p>
-    </div>
-</div>
-
-<!-- PAGE 14 -->
-<div class="page" data-page="14">
-    <div class="card">
-        <h2>📖 Page 14: Zara ka Saath 🌹</h2>
-        <p>Zara ne mujhe sambhala, support kiya aur mere bure waqt me saath diya. Hamari fights bhi hoti thi par pyar bhi utna hi tha ❤️</p>
-    </div>
-</div>
-
-<!-- PAGE 15 -->
-<div class="page" data-page="15">
-    <div class="card">
-        <h2>📖 Page 15: Dil ki Baat 💌</h2>
-        <p>Aaj bhi hamare beech ladai hoti hai par mai usse bahut pyar karta hu aur bas ye hi kehna hai – kabhi chhor kar mat jana mujhe. The End ❤️</p>
-    </div>
-</div>
-</div>
-
-<div id="hearts"></div>
-
-<script>
-let pages = document.querySelectorAll(".page");
-let currentPage = 0;
-let music = document.getElementById("music");
-let musicBtn = document.getElementById("musicBtn");
-let pageNum = document.getElementById("pageNum");
-
-// Touch/Swipe Support
-let startX = 0;
-document.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-document.addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) nextPage();  // Swipe left
-    if (endX - startX > 50) prevPage();  // Swipe right
-});
-
-// Click/Tap Navigation
-document.body.addEventListener("click", nextPage);
-
-// Page Functions
-function nextPage() {
-    pages[currentPage].classList.remove("active");
-    currentPage = (currentPage + 1) % pages.length;
-    pages[currentPage].classList.add("active");
-    updatePageCounter();
-}
-
-function prevPage() {
-    pages[currentPage].classList.remove("active");
-    currentPage = (currentPage - 1 + pages.length) % pages.length;
-    pages[currentPage].classList.add("active");
-    updatePageCounter();
-}
-
-function updatePageCounter() {
-    pageNum.textContent = currentPage + 1;
-}
-
-// Floating Hearts Animation (60fps)
-function createHeart() {
-    let heart = document.createElement("span");
-    heart.innerHTML = ["❤️","💖","💕","💗","💓"][Math.floor(Math.random()*5)];
-    heart.style.left = Math.random() * 100 + "%";
-    heart.style.fontSize = (12 + Math.random() * 12) + "px";
-    heart.style.animationDuration = (5 + Math.random() * 3) + "s";
-    document.getElementById("hearts").appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-}
-
-setInterval(createHeart, 250);
-
-// Music Control
-musicBtn.addEventListener("click", function(e) {
-    e.stopPropagation();
-    if (music.paused) {
-        music.play().catch(() => {});
-        musicBtn.textContent = "🎵 Music ON";
-        musicBtn.style.background = "rgba(76, 175, 80, 0.8)";
-    } else {
-        music.pause();
-        musicBtn.textContent = "🎵 Music OFF";
-        musicBtn.style.background = "rgba(0,0,0,0.7)";
-    }
-});
-
-// Keyboard Support
-document.addEventListener("keydown", e => {
-    if (e.key === "ArrowRight" || e.key === " ") nextPage();
-    if (e.key === "ArrowLeft") prevPage();
-});
-</script>
 </body>
 </html>
