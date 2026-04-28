@@ -29,13 +29,25 @@ h2{font-size:1.5em;margin:20px 0 15px;color:#ffd93d;}
 p{line-height:1.7;font-size:1.1em;}
 
 .music-btn{position:fixed;top:20px;right:20px;background:rgba(0,0,0,0.7);border:none;
-padding:15px;border-radius:50px;color:#fff;font-size:1.2em;cursor:pointer;}
+padding:15px;border-radius:50px;color:#fff;font-size:1.2em;cursor:pointer;z-index:1000;
+transition:background 0.3s;}
+
+.music-btn:hover{background:rgba(0,0,0,0.9);}
 
 .page-counter{position:fixed;bottom:20px;left:20px;background:rgba(0,0,0,0.5);
-padding:10px 20px;border-radius:25px;}
+padding:10px 20px;border-radius:25px;z-index:1000;}
 
-#hearts span{position:absolute;bottom:-30px;font-size:20px;animation:float 8s linear infinite;}
-@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-100px);opacity:0;}}
+#hearts span{position:absolute;bottom:-30px;font-size:20px;animation:float 8s linear infinite;color:#ff6b9d;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-100px) rotate(360deg);opacity:0;}}
+
+/* Navigation Arrows */
+.nav-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,107,157,0.8);border:none;
+padding:20px;border-radius:50%;color:#fff;font-size:1.5em;cursor:pointer;z-index:1000;
+transition:all 0.3s;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+.nav-arrow:hover{background:rgba(255,107,157,1);transform:translateY(-50%) scale(1.1);}
+
+.prev-arrow{left:20px;}
+.next-arrow{right:20px;}
 </style>
 </head>
 
@@ -45,10 +57,17 @@ padding:10px 20px;border-radius:25px;}
 
 <button class="music-btn" id="musicBtn">🎵 Music OFF</button>
 <audio id="music" loop preload="auto">
+<!-- Replace with your music file or use online free music -->
 <source src="music.mp3" type="audio/mpeg">
+<!-- Fallback free music (remove if you have your own) -->
+<source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
 </audio>
 
 <div class="page-counter"><span id="pageNum">1</span> / 15</div>
+
+<!-- Navigation Arrows -->
+<button class="nav-arrow prev-arrow" id="prevBtn">←</button>
+<button class="nav-arrow next-arrow" id="nextBtn">→</button>
 
 <div id="pages">
 
@@ -103,12 +122,121 @@ padding:10px 20px;border-radius:25px;}
 <div id="hearts"></div>
 
 <script>
-let pages=document.querySelectorAll(".page");
-let currentPage=0;
-let music=document.getElementById("music");
-let musicBtn=document.getElementById("musicBtn");
-let pageNum=document.getElementById("pageNum");
+let pages = document.querySelectorAll(".page");
+let currentPage = 0;
+let music = document.getElementById("music");
+let musicBtn = document.getElementById("musicBtn");
+let pageNum = document.getElementById("pageNum");
+let prevBtn = document.getElementById("prevBtn");
+let nextBtn = document.getElementById("nextBtn");
 
+// Show specific page
+function showPage(index) {
+    pages.forEach(p => p.classList.remove("active"));
+    pages[index].classList.add("active");
+    pageNum.textContent = index + 1;
+    currentPage = index;
+}
+
+// Next page
+function nextPage() {
+    let nextIndex = (currentPage + 1) % pages.length;
+    showPage(nextIndex);
+}
+
+// Previous page
+function prevPage() {
+    let prevIndex = currentPage === 0 ? pages.length - 1 : currentPage - 1;
+    showPage(prevIndex);
+}
+
+// Page navigation events
+nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    nextPage();
+});
+
+prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    prevPage();
+});
+
+// Keyboard navigation
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === " ") {
+        nextPage();
+    } else if (e.key === "ArrowLeft") {
+        prevPage();
+    }
+});
+
+// Touch/Swipe support for mobile
+let startX = 0;
+document.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+    
+    if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+            nextPage(); // Swipe left = next
+        } else {
+            prevPage(); // Swipe right = previous
+        }
+    }
+});
+
+// Click anywhere to go next (except buttons)
+document.addEventListener("click", (e) => {
+    if (!e.target.closest('.music-btn') && 
+        !e.target.closest('.nav-arrow') && 
+        !e.target.closest('.card')) {
+        nextPage();
+    }
+});
+
+// Music controls - Fixed autoplay issue
+musicBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (music.paused) {
+        music.play().then(() => {
+            musicBtn.textContent = "🎵 Music ON";
+        }).catch(err => {
+            console.log("Music play failed:", err);
+            musicBtn.textContent = "🎵 Music OFF (Click to Play)";
+        });
+    } else {
+        music.pause();
+        musicBtn.textContent = "🎵 Music OFF";
+    }
+});
+
+// Auto-create floating hearts
+function createHeart() {
+    let heart = document.createElement("span");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
+    document.getElementById("hearts").appendChild(heart);
+    
+    setTimeout(() => {
+        heart.remove();
+    }, 8000);
+}
+
+// Start heart animation
+setInterval(createHeart, 300);
+
+// Initialize
+showPage(0);
+console.log("Meri Kahani loaded successfully! 🎉");
+</script>
+
+</body>
+</html>
 function showPage(i){pages.forEach(p=>p.classList.remove("active"));pages[i].classList.add("active");pageNum.textContent=i+1;}
 function nextPage(){currentPage=(currentPage+1)%pages.length;showPage(currentPage);}
 document.body.addEventListener("click",nextPage);
